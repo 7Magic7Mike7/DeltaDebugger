@@ -1,27 +1,14 @@
 package delta_debugger;
 
-import program.BubbleSort;
-
-import java.util.Arrays;
+import program.Test;
 
 public class Main {
 
     public static void main(String[] args) {
-        Integer[] arr = { 1, 6, 9, 7, 5 };
-        DDmin ddmin = new DDmin(Main::test);
+        IntArray arr = new IntArray(1, 6, 9, 7, 5);
+        final DDmin<Integer[]> ddmin = new DDmin<>(Test::bubbleSort);
         final Integer[] min = ddmin.execute(arr);
-        for(final int i : min) System.out.println(i);
-    }
-
-    private static boolean test(Integer[] c) {
-        final Integer[] copy = new Integer[c.length];
-        System.arraycopy(c, 0, copy, 0, c.length);
-        Arrays.sort(copy);
-        BubbleSort.bubbleSort(c, c.length);
-        for(int i = 0; i < c.length; i++) {
-            if(!c[i].equals(copy[i]))
-                return false;
-        }
-        return true;
+        if(min == null) System.out.println("Input is correct, so nothing to do.");
+        else for(final int i : min) System.out.println(i);
     }
 }
